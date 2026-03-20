@@ -1,23 +1,22 @@
 # B-1368.github.io
 
-个人主页（单文件 `index.html`，内嵌样式与脚本）。
+一个静态的个人主页，风格参考 [Academic Jekyll](https://vsimkus.github.io/academic-jekyll/)。
+
+当前版本保留了学术主页那种简洁布局，但实现成了单文件 `index.html`，这样可以直接放在 GitHub Pages 根目录，不需要额外配置 Jekyll 构建。
+
+## 自定义
+
+直接编辑 `index.html` 中这些区域即可：
+
+1. 顶部简介 `hero`
+2. `About`
+3. `Interests`
+4. `Selected Work`
+5. GitHub / Source / Website 链接
 
 ## 部署
 
-1. 在 GitHub 新建仓库，名称必须为 **`B-1368.github.io`**（与用户名一致）。
-2. 把本文件夹内容推送到 `main` 分支根目录。
-3. 仓库 **Settings → Pages**：Branch 选 **main**，文件夹 **/ (root)**。
+仓库地址：`git@github.com:B-1368/B-1368.github.io.git`  
+站点地址：[https://b-1368.github.io](https://b-1368.github.io)
 
-站点地址：**https://b-1368.github.io**
-
-```bash
-cd B-1368.github.io
-git init
-git add index.html README.md
-git commit -m "Add personal page"
-git branch -M main
-git remote add origin https://github.com/B-1368/B-1368.github.io.git
-git push -u origin main
-```
-
-（若远程已有提交，先按 GitHub 页面提示拉取或改用 `git remote` 指向你的仓库。）
+推送后，GitHub Pages 会自动更新页面。
