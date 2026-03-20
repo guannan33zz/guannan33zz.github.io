@@ -153,6 +153,13 @@
       border: 1px solid var(--line);
       box-shadow: var(--shadow);
       background: var(--panel);
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .portrait:hover {
+      transform: scale(1.02);
+      box-shadow: 0 22px 48px rgba(15, 23, 42, 0.12);
     }
 
     section {
@@ -407,9 +414,11 @@
       </div>
       <div class="portrait-wrap">
         <img
+          id="profile-portrait"
           class="portrait"
           src="assets/guannan.jpeg"
           alt="Guannan Li profile photo"
+          title="Click me"
         />
       </div>
     </section>
@@ -601,13 +610,18 @@
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
 
+    const portrait = document.getElementById("profile-portrait");
     const fireworksButton = document.getElementById("fireworks-button");
     const fireworksCanvas = document.getElementById("fireworks-canvas");
     const fireworksContext = fireworksCanvas.getContext("2d");
     const particles = [];
+    const originalPortraitSrc = "assets/guannan.jpeg";
+    const easterEggPortraitSrc = "assets/LGN2.png";
     let animationFrameId = null;
     let burstIntervalId = null;
     let fireworksTimeoutId = null;
+    let portraitClickCount = 0;
+    let portraitSwapped = false;
 
     function resizeFireworksCanvas() {
       const ratio = window.devicePixelRatio || 1;
@@ -700,6 +714,19 @@
 
       if (animationFrameId === null) {
         animateFireworks();
+      }
+    });
+
+    portrait.addEventListener("click", () => {
+      if (portraitSwapped) {
+        return;
+      }
+
+      portraitClickCount += 1;
+
+      if (portraitClickCount >= 5) {
+        portrait.src = easterEggPortraitSrc;
+        portraitSwapped = true;
       }
     });
 
