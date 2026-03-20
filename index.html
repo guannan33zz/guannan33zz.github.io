@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="B-1368 的个人主页" />
+  <title>B-1368 · 个人主页</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0c0f14;
+      --bg-2: #141922;
+      --text: #e8eaef;
+      --muted: #8b93a7;
+      --accent: #7c9cff;
+      --accent-bg: rgba(124, 156, 255, 0.14);
+      --border: rgba(255, 255, 255, 0.08);
+      --radius: 12px;
+      --max: 640px;
+      --font-sans: "DM Sans", system-ui, sans-serif;
+      --font-serif: "Instrument Serif", Georgia, serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: var(--font-sans);
+      font-size: 1.05rem;
+      line-height: 1.65;
+      color: var(--text);
+      background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: calc(var(--max) + 4rem);
+      margin: 0 auto;
+      padding: 1.25rem 1.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .logo { font-weight: 600; color: var(--text); }
+    .logo:hover { color: var(--accent); text-decoration: none; }
+    .nav { display: flex; gap: 1.5rem; }
+    .nav a { color: var(--muted); font-size: 0.95rem; font-weight: 500; }
+    .nav a:hover { color: var(--text); text-decoration: none; }
+    main {
+      max-width: calc(var(--max) + 4rem);
+      margin: 0 auto;
+      padding: 0 1.5rem 4rem;
+    }
+    .hero { padding: 4.5rem 0 3rem; }
+    .hero p.eyebrow { margin: 0 0 0.5rem; font-size: 0.95rem; color: var(--muted); }
+    .hero h1 {
+      margin: 0 0 1rem;
+      font-family: var(--font-serif);
+      font-size: clamp(2.5rem, 8vw, 3.75rem);
+      font-weight: 400;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+    }
+    .hero h1 span {
+      background: linear-gradient(120deg, var(--text) 0%, var(--accent) 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .hero .tagline { margin: 0 0 1.75rem; max-width: 30ch; color: var(--muted); }
+    .actions { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.65rem 1.25rem;
+      border-radius: var(--radius);
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+    .btn:hover { text-decoration: none; transform: translateY(-1px); }
+    .btn-primary { background: var(--accent); color: var(--bg); border: 1px solid transparent; }
+    .btn-primary:hover { filter: brightness(1.08); }
+    .btn-ghost { border: 1px solid var(--border); color: var(--text); background: transparent; }
+    .btn-ghost:hover { background: var(--accent-bg); border-color: var(--muted); }
+    section {
+      padding: 2.75rem 0;
+      border-top: 1px solid var(--border);
+    }
+    section h2 {
+      margin: 0 0 1rem;
+      font-size: 0.78rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+    }
+    section p { margin: 0; color: var(--muted); max-width: var(--max); }
+    .github-card {
+      display: inline-flex;
+      margin-top: 1.25rem;
+      padding: 1rem 1.15rem;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.02);
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .github-card:hover { border-color: rgba(124, 156, 255, 0.35); background: var(--accent-bg); text-decoration: none; }
+    .github-card strong { display: block; color: var(--text); font-size: 1rem; }
+    .github-card small { color: var(--muted); font-size: 0.85rem; }
+    footer {
+      max-width: calc(var(--max) + 4rem);
+      margin: 0 auto;
+      padding: 2rem 1.5rem 3rem;
+      border-top: 1px solid var(--border);
+      text-align: center;
+    }
+    footer p { margin: 0; font-size: 0.85rem; color: var(--muted); }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <a class="logo" href="#">B-1368</a>
+    <nav class="nav">
+      <a href="#about">关于</a>
+      <a href="https://github.com/B-1368" target="_blank" rel="noopener noreferrer">GitHub</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="top">
+      <p class="eyebrow">你好，我是</p>
+      <h1><span>B-1368</span></h1>
+      <p class="tagline">这是我的个人主页。你可以修改本页文字，或链到你的项目与社交账号。</p>
+      <div class="actions">
+        <a class="btn btn-primary" href="https://github.com/B-1368" target="_blank" rel="noopener noreferrer">访问我的 GitHub</a>
+        <a class="btn btn-ghost" href="#about">了解更多</a>
+      </div>
+    </section>
+
+    <section id="about">
+      <h2>关于</h2>
+      <p>站点托管在 GitHub Pages。编辑本文件 <code style="font-size:0.9em;padding:0.15em 0.4em;border-radius:6px;background:var(--bg-2);border:1px solid var(--border);">index.html</code> 后提交并推送到仓库即可更新页面。</p>
+      <a class="github-card" href="https://github.com/B-1368" target="_blank" rel="noopener noreferrer">
+        <div>
+          <strong>github.com/B-1368</strong>
+          <small>查看仓库与动态</small>
+        </div>
+      </a>
+    </section>
+  </main>
+
+  <footer>
+    <p>© <span id="y"></span> B-1368 · GitHub Pages</p>
+  </footer>
+  <script>
+    document.getElementById("y").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
