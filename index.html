@@ -302,9 +302,8 @@
       text-align: center;
     }
 
-    .fireworks-button {
+    .action-button {
       position: fixed;
-      right: 1.5rem;
       bottom: 1.5rem;
       z-index: 30;
       border: 1px solid var(--line);
@@ -318,10 +317,19 @@
       transition: transform 0.2s ease, box-shadow 0.2s ease, color 0.2s ease;
     }
 
-    .fireworks-button:hover {
+    .action-button:hover {
       transform: translateY(-1px);
       color: var(--accent);
       box-shadow: 0 14px 28px rgba(15, 23, 42, 0.12);
+    }
+
+    .fireworks-button {
+      right: 1.5rem;
+    }
+
+    .safari-button {
+      right: 8.2rem;
+      display: none;
     }
 
     .fireworks-canvas {
@@ -331,6 +339,45 @@
       height: 100vh;
       pointer-events: none;
       z-index: 25;
+    }
+
+    .migration-layer {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 24;
+    }
+
+    .migration-animal {
+      position: absolute;
+      right: -12vw;
+      will-change: transform, opacity;
+      opacity: 0;
+      animation-name: migration-run;
+      animation-timing-function: linear;
+      animation-fill-mode: forwards;
+      filter: drop-shadow(0 10px 14px rgba(15, 23, 42, 0.16));
+    }
+
+    @keyframes migration-run {
+      0% {
+        transform: translateX(0) scaleX(-1);
+        opacity: 0;
+      }
+
+      8% {
+        opacity: 1;
+      }
+
+      92% {
+        opacity: 1;
+      }
+
+      100% {
+        transform: translateX(-125vw) scaleX(-1);
+        opacity: 0;
+      }
     }
 
     @media (max-width: 760px) {
@@ -366,6 +413,11 @@
 
       .fireworks-button {
         right: 1rem;
+        bottom: 1rem;
+      }
+
+      .safari-button {
+        right: 7.1rem;
         bottom: 1rem;
       }
     }
@@ -429,9 +481,11 @@
         organization.
       </p>
       <div class="tags" aria-label="Interest tags">
+        <span class="tag">Macroeconomics</span>
         <span class="tag">Innovation Economics</span>
         <span class="tag">Technology Adoption</span>
         <span class="tag">Productivity</span>
+        <span class="tag">Industrial Organization</span>
       </div>
     </section>
 
@@ -601,7 +655,11 @@
   </footer>
 
   <canvas id="fireworks-canvas" class="fireworks-canvas" aria-hidden="true"></canvas>
-  <button id="fireworks-button" class="fireworks-button" type="button">
+  <div id="migration-layer" class="migration-layer" aria-hidden="true"></div>
+  <button id="safari-button" class="action-button safari-button" type="button">
+    Safari
+  </button>
+  <button id="fireworks-button" class="action-button fireworks-button" type="button">
     Fireworks
   </button>
 
@@ -609,17 +667,67 @@
     document.getElementById("year").textContent = new Date().getFullYear();
 
     const portrait = document.getElementById("profile-portrait");
+    const safariButton = document.getElementById("safari-button");
     const fireworksButton = document.getElementById("fireworks-button");
     const fireworksCanvas = document.getElementById("fireworks-canvas");
     const fireworksContext = fireworksCanvas.getContext("2d");
+    const migrationLayer = document.getElementById("migration-layer");
     const particles = [];
     const originalPortraitSrc = "assets/guannan.jpeg";
     const easterEggPortraitSrc = "assets/LGN2.png";
     let animationFrameId = null;
     let burstIntervalId = null;
     let fireworksTimeoutId = null;
+    let migrationTimeoutId = null;
     let portraitClickCount = 0;
     let portraitSwapped = false;
+
+    function isSafariBrowser() {
+      const ua = navigator.userAgent;
+      const vendor = navigator.vendor || "";
+      const isAppleVendor = vendor.includes("Apple");
+      const hasSafari = ua.includes("Safari");
+      const excludedBrowsers = /(Chrome|CriOS|Edg|OPR|Firefox|FxiOS|SamsungBrowser|Android)/.test(ua);
+      return isAppleVendor && hasSafari && !excludedBrowsers;
+    }
+
+    function isDesktopFireworks() {
+      return window.matchMedia("(min-width: 761px)").matches;
+    }
+
+    function getFireworksConfig() {
+      if (isDesktopFireworks()) {
+        return {
+          count: 72,
+          minSpeed: 2.1,
+          speedRange: 3.9,
+          minLife: 82,
+          lifeRange: 30,
+          minSize: 2.8,
+          sizeRange: 3.8,
+          intervalMs: 180,
+          durationMs: 3200,
+          burstPerLaunch: 2,
+          xSpread: 0.1,
+          ySpread: 0.08,
+        };
+      }
+
+      return {
+        count: 42,
+        minSpeed: 1.6,
+        speedRange: 2.8,
+        minLife: 70,
+        lifeRange: 24,
+        minSize: 2,
+        sizeRange: 2.6,
+        intervalMs: 320,
+        durationMs: 3200,
+        burstPerLaunch: 1,
+        xSpread: 0,
+        ySpread: 0,
+      };
+    }
 
     function resizeFireworksCanvas() {
       const ratio = window.devicePixelRatio || 1;
@@ -632,30 +740,37 @@
 
     function createBurst(x, y) {
       const colors = ["#f97316", "#38bdf8", "#a855f7", "#22c55e", "#fde047", "#fb7185"];
-      const count = 42;
+      const config = getFireworksConfig();
+      const count = config.count;
 
       for (let i = 0; i < count; i += 1) {
         const angle = (Math.PI * 2 * i) / count;
-        const speed = 1.6 + Math.random() * 2.8;
+        const speed = config.minSpeed + Math.random() * config.speedRange;
 
         particles.push({
           x,
           y,
           vx: Math.cos(angle) * speed,
           vy: Math.sin(angle) * speed,
-          life: 70 + Math.random() * 24,
+          life: config.minLife + Math.random() * config.lifeRange,
           decay: 0.96,
           gravity: 0.045 + Math.random() * 0.02,
-          size: 2 + Math.random() * 2.6,
+          size: config.minSize + Math.random() * config.sizeRange,
           color: colors[Math.floor(Math.random() * colors.length)],
         });
       }
     }
 
     function launchRandomBurst() {
-      const x = window.innerWidth * (0.15 + Math.random() * 0.7);
-      const y = window.innerHeight * (0.12 + Math.random() * 0.45);
-      createBurst(x, y);
+      const config = getFireworksConfig();
+
+      for (let i = 0; i < config.burstPerLaunch; i += 1) {
+        const x = window.innerWidth * (0.15 + Math.random() * 0.7);
+        const y = window.innerHeight * (0.12 + Math.random() * 0.45);
+        const offsetX = (Math.random() - 0.5) * window.innerWidth * config.xSpread;
+        const offsetY = (Math.random() - 0.5) * window.innerHeight * config.ySpread;
+        createBurst(x + offsetX, y + offsetY);
+      }
     }
 
     function animateFireworks() {
@@ -702,18 +817,73 @@
       }
     }
 
+    function clearMigration() {
+      if (migrationTimeoutId !== null) {
+        window.clearTimeout(migrationTimeoutId);
+        migrationTimeoutId = null;
+      }
+
+      migrationLayer.replaceChildren();
+    }
+
+    function launchMigration() {
+      clearMigration();
+
+      const animals = [
+        "\ud83d\udc18",
+        "\ud83e\udd92",
+        "\ud83d\udc03",
+        "\ud83d\udc2a",
+        "\ud83e\udd8c",
+        "\ud83d\udc0e",
+        "\ud83e\udda9",
+      ];
+
+      const rows = [0.68, 0.73, 0.78, 0.83];
+      const totalAnimals = 24;
+
+      for (let i = 0; i < totalAnimals; i += 1) {
+        const animal = document.createElement("span");
+        const lane = rows[i % rows.length];
+        const isBird = i % 6 === 0;
+        const verticalJitter = (Math.random() - 0.5) * (isBird ? 0.05 : 0.03);
+        const top = window.innerHeight * (isBird ? 0.2 + Math.random() * 0.16 : lane + verticalJitter);
+        const size = isBird ? 28 + Math.random() * 8 : 34 + Math.random() * 16;
+        const duration = 4.4 + Math.random() * 1.4;
+        const delay = i * 110 + Math.random() * 220;
+
+        animal.className = "migration-animal";
+        animal.textContent = animals[Math.floor(Math.random() * animals.length)];
+        animal.style.top = `${top}px`;
+        animal.style.fontSize = `${size}px`;
+        animal.style.animationDuration = `${duration}s`;
+        animal.style.animationDelay = `${delay}ms`;
+
+        if (!isBird) {
+          animal.style.bottom = "auto";
+        }
+
+        migrationLayer.appendChild(animal);
+      }
+
+      migrationTimeoutId = window.setTimeout(clearMigration, 7200);
+    }
+
     fireworksButton.addEventListener("click", () => {
+      const config = getFireworksConfig();
       stopFireworks();
       particles.length = 0;
       resizeFireworksCanvas();
       launchRandomBurst();
-      burstIntervalId = window.setInterval(launchRandomBurst, 320);
-      fireworksTimeoutId = window.setTimeout(stopFireworks, 3200);
+      burstIntervalId = window.setInterval(launchRandomBurst, config.intervalMs);
+      fireworksTimeoutId = window.setTimeout(stopFireworks, config.durationMs);
 
       if (animationFrameId === null) {
         animateFireworks();
       }
     });
+
+    safariButton.addEventListener("click", launchMigration);
 
     portrait.addEventListener("click", () => {
       if (portraitSwapped) {
@@ -727,6 +897,10 @@
         portraitSwapped = true;
       }
     });
+
+    if (isSafariBrowser()) {
+      safariButton.style.display = "block";
+    }
 
     window.addEventListener("resize", resizeFireworksCanvas);
     resizeFireworksCanvas();
