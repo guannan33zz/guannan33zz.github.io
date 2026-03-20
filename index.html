@@ -872,7 +872,7 @@
       migrationTimeoutId = window.setTimeout(clearMigration, 7200);
     }
 
-    fireworksButton.addEventListener("click", () => {
+    function triggerFireworks() {
       const config = getFireworksConfig();
       stopFireworks();
       particles.length = 0;
@@ -884,7 +884,9 @@
       if (animationFrameId === null) {
         animateFireworks();
       }
-    });
+    }
+
+    fireworksButton.addEventListener("click", triggerFireworks);
 
     safariButton.addEventListener("click", launchMigration);
 
@@ -898,6 +900,7 @@
       if (portraitClickCount >= 5) {
         portrait.src = easterEggPortraitSrc;
         portraitSwapped = true;
+        triggerFireworks();
       }
     });
 
