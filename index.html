@@ -351,7 +351,10 @@
 
     .migration-animal {
       position: absolute;
-      right: -12vw;
+      left: 105vw;
+      display: block;
+      line-height: 1;
+      user-select: none;
       will-change: transform, opacity;
       opacity: 0;
       animation-name: migration-run;
@@ -362,7 +365,7 @@
 
     @keyframes migration-run {
       0% {
-        transform: translateX(0) scaleX(-1);
+        transform: translateX(0);
         opacity: 0;
       }
 
@@ -375,7 +378,7 @@
       }
 
       100% {
-        transform: translateX(-125vw) scaleX(-1);
+        transform: translateX(-140vw);
         opacity: 0;
       }
     }
@@ -823,7 +826,7 @@
         migrationTimeoutId = null;
       }
 
-      migrationLayer.replaceChildren();
+      migrationLayer.innerHTML = "";
     }
 
     function launchMigration() {
