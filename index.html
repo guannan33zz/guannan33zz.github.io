@@ -5,9 +5,64 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta
     name="description"
-    content="Guannan Li personal homepage inspired by the Academic Jekyll template."
+    content="Guannan Li is a PhD candidate in Economics at McGill University, working on innovation, regional development, inventor mobility and technology adoption."
   />
-  <title>Guannan Li</title>
+  <title>Guannan Li | PhD Candidate in Economics, McGill University</title>
+  <link rel="canonical" href="https://guannan33zz.github.io/" />
+
+  <meta property="og:type" content="profile" />
+  <meta property="og:site_name" content="Guannan Li" />
+  <meta property="og:title" content="Guannan Li | PhD Candidate in Economics, McGill University" />
+  <meta property="og:description" content="PhD candidate in Economics at McGill University. Research on innovation, regional development, inventor mobility and technology adoption." />
+  <meta property="og:url" content="https://guannan33zz.github.io/" />
+  <meta property="og:image" content="https://guannan33zz.github.io/assets/guannan.jpeg" />
+  <meta property="profile:first_name" content="Guannan" />
+  <meta property="profile:last_name" content="Li" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Guannan Li | PhD Candidate in Economics, McGill University" />
+  <meta name="twitter:description" content="PhD candidate in Economics at McGill University. Research on innovation, regional development, inventor mobility and technology adoption." />
+  <meta name="twitter:image" content="https://guannan33zz.github.io/assets/guannan.jpeg" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Guannan Li",
+    "givenName": "Guannan",
+    "familyName": "Li",
+    "url": "https://guannan33zz.github.io/",
+    "image": "https://guannan33zz.github.io/assets/guannan.jpeg",
+    "email": "mailto:guannan.li@mail.mcgill.ca",
+    "jobTitle": "PhD Candidate in Economics",
+    "description": "PhD candidate in Economics at McGill University, working on innovation, regional development, inventor mobility and technology adoption.",
+    "affiliation": {
+      "@type": "CollegeOrUniversity",
+      "name": "McGill University",
+      "department": {
+        "@type": "Organization",
+        "name": "Department of Economics"
+      },
+      "url": "https://www.mcgill.ca/economics/"
+    },
+    "alumniOf": [
+      { "@type": "CollegeOrUniversity", "name": "Boston University" },
+      { "@type": "CollegeOrUniversity", "name": "Renmin University of China" }
+    ],
+    "worksFor": {
+      "@type": "CollegeOrUniversity",
+      "name": "McGill University"
+    },
+    "knowsAbout": [
+      "Economics of Innovation",
+      "Regional Economics",
+      "Macroeconomics",
+      "Technology Adoption",
+      "Productivity",
+      "Industrial Organization",
+      "Inventor Mobility"
+    ]
+  }
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
@@ -304,6 +359,18 @@
       color: var(--muted);
     }
 
+    .card-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.55rem;
+      align-items: center;
+      font-size: 0.95rem;
+    }
+
+    .card-links span {
+      color: #9ca3af;
+    }
+
     .site-footer {
       padding: 1.5rem 0 2.5rem;
       border-top: 1px solid var(--line);
@@ -587,23 +654,34 @@
         <article class="card">
           <div class="card-visual">Working Paper</div>
           <div>
-            <h3>The Impact of Star Inventors on Innovation Output Across Technology Classes Within a Country</h3>
-            <div class="meta">Presented in the Canadian Economics Association Conference · 2026</div>
+            <h3>Transportation Infrastructure and the Quality of Regional Innovation</h3>
+            <div class="meta">
+              Presented at CEA 2025 as “The Effect of Transportation on the
+              Average Innovation Ability in a Region”
+            </div>
             <p>
-              Examines how star inventors affect innovation output across
-              technology classes within a country.
+              Estimates the causal effect of interstate highways on average
+              innovation quality in metropolitan statistical areas. A 10%
+              increase in interstate highways raises average innovation quality,
+              measured by citations per inventor, by roughly 1.47% over a
+              five-year period.
             </p>
+            <div class="card-links">
+              <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=7308354" target="_blank" rel="noopener noreferrer">Paper (SSRN)</a>
+              <span>·</span>
+              <a href="https://doi.org/10.5281/zenodo.21942779" target="_blank" rel="noopener noreferrer">Replication package</a>
+            </div>
           </div>
         </article>
 
         <article class="card">
           <div class="card-visual">Working Paper</div>
           <div>
-            <h3>The Effect of Transportation on the Average Innovation Ability in a Region</h3>
-            <div class="meta">Presented in the Canadian Economics Association Conference · 2025</div>
+            <h3>The Impact of Star Inventors on Innovation Output Across Technology Classes Within a Country</h3>
+            <div class="meta">Presented in the Canadian Economics Association Conference · 2026</div>
             <p>
-              Studies the relationship between transportation infrastructure and
-              average innovation quality at the regional level.
+              Examines how star inventors affect innovation output across
+              technology classes within a country.
             </p>
           </div>
         </article>
