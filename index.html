@@ -382,6 +382,41 @@
       color: #9ca3af;
     }
 
+    .card-abstract {
+      margin: 0 0 0.65rem;
+      font-size: 0.95rem;
+    }
+
+    .card-abstract > summary {
+      cursor: pointer;
+      color: var(--accent);
+      width: fit-content;
+      list-style: none;
+    }
+
+    .card-abstract > summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .card-abstract > summary::after {
+      content: " \25be";
+      color: #9ca3af;
+    }
+
+    .card-abstract[open] > summary::after {
+      content: " \25b4";
+    }
+
+    .card-abstract > summary:hover {
+      color: var(--accent-hover);
+    }
+
+    .card-abstract p {
+      margin: 0.5rem 0 0;
+      color: var(--muted);
+      text-align: justify;
+    }
+
     .site-footer {
       padding: 1.5rem 0 2.5rem;
       border-top: 1px solid var(--line);
@@ -680,6 +715,34 @@
               measured by citations per inventor, by roughly 1.47% over a
               five-year period.
             </p>
+            <details class="card-abstract">
+              <summary>Abstract</summary>
+              <p>
+                Transportation infrastructure facilitates the agglomeration of
+                economic activity and the diffusion of knowledge, yet its impact
+                on average regional innovation quality remains less well
+                understood. This paper estimates the causal effect of interstate
+                highways on average innovation quality in metropolitan
+                statistical areas (MSAs). I find that a 10% increase in
+                interstate highways leads to roughly a 1.47% increase in average
+                innovation quality, measured by citations per inventor, over a
+                five-year period. To address the endogeneity problem, I use the
+                1947 interstate highway plan, the historical railroad network
+                and old exploration expeditions as sources of exogenous
+                variation to estimate the causal effect. Using a simple
+                empirical model, I demonstrate that the impact of transportation
+                on total innovation quality is primarily driven by average
+                innovation quality rather than by the number of inventors. In
+                terms of the mechanism, transportation can be treated as an
+                amenity that attracts inventors to move to the region where the
+                transportation stock is higher. New inventors in a region can be
+                viewed as a form of research resource, bringing new ideas to the
+                region and increasing its average innovation output. By
+                connecting transportation infrastructure to the spatial
+                distribution of innovation, the paper is relevant to regional
+                and urban development policy.
+              </p>
+            </details>
             <div class="card-links">
               <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=7308354" target="_blank" rel="noopener noreferrer">Paper (SSRN)</a>
               <span>·</span>
@@ -691,7 +754,7 @@
         <article class="card">
           <div class="card-visual">Working Paper</div>
           <div>
-            <h3>The Impact of Star Inventors on Innovation Output Across Technology Classes Within a Country</h3>
+            <h3>Star Inventors and Innovation across U.S. Technology Classes</h3>
             <ul class="meta-list">
               <li>Presented in the Canadian Economics Association Conference, 2026</li>
               <li>Presented in the 20th CIREQ-CIRANO Ph.D. Students’ Conference</li>
